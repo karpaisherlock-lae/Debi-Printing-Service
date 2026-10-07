@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Contact | Debi Printing Service</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Russo+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap">
+    <a class="logo" href="index.html">DEBI PRINTING SERVICE</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Printing Services</a></li>
+        <li><a href="contact.html" aria-current="page">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="section">
+    <div class="wrap">
+      <h2>Contact, quotes and booking</h2>
+      <p>Send an enquiry, request a quote or book a printing job. Fill in the form and we will reply as soon as we can.</p>
+      <form id="enquiry-form" novalidate>
+        <label>Full name
+          <input type="text" id="name" name="name" required autocomplete="name">
+        </label>
+        <label>Email address
+          <input type="email" id="email" name="email" required autocomplete="email">
+        </label>
+        <label>Phone number
+          <input type="tel" id="phone" name="phone" autocomplete="tel">
+        </label>
+        <label>I want to
+          <select id="type" name="type">
+            <option>Make an enquiry</option>
+            <option>Request a quote</option>
+            <option>Book a printing job</option>
+          </select>
+        </label>
+        <label>Date needed (for bookings)
+          <input type="date" id="date" name="date">
+        </label>
+        <label>Message
+          <textarea id="message" name="message" required></textarea>
+        </label>
+        <p class="error" id="error" role="alert" hidden></p>
+        <button class="btn" type="submit">Send enquiry</button>
+      </form>
+      <div class="msg" id="confirm" role="status" hidden></div>
+      <p class="note" style="margin-top:32px">This form does not send data anywhere.</p>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <strong>Debi Printing Service / Papua New Guinea</strong>
+     Morobe - Lae.
+  </div>
+</footer>
+<script>
+  const form = document.getElementById("enquiry-form");
+  const error = document.getElementById("error");
+  const confirmBox = document.getElementById("confirm");
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    const message = form.message.value.trim();
+
+    if (!name || !email || !message) {
+      error.textContent = "Please fill in your name, email address and message.";
+      error.hidden = false;
+      confirmBox.hidden = true;
+      return;
+    }
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      error.textContent = "Enter a valid email address, for example name@example.com.";
+      error.hidden = false;
+      confirmBox.hidden = true;
+      return;
+    }
+    error.hidden = true;
+    confirmBox.textContent = "Thank you, " + name + ". Your " + form.type.value.toLowerCase() + " has been received (prototype only).";
+    confirmBox.hidden = false;
+    form.reset();
+  });
+</script>
+</body>
+</html>
